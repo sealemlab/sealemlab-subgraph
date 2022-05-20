@@ -1,0 +1,35 @@
+type BuyInfo @entity {
+  id: ID!
+  buyer: Bytes!
+  seller: Bytes!
+  nft: Bytes!
+  nftId: BigInt!
+  token: Bytes!
+  price: BigInt!
+  fee: BigInt!
+  sellAmount: BigInt!
+  feeAmount: BigInt!
+  buyTime: BigInt!
+  star: BigInt!
+  rarity: BigInt!
+  snClass: BigInt!
+  position: BigInt!
+  suit: BigInt!
+  boxType: BigInt!
+}
+
+type SellInfo @entity {
+  id: ID!
+  seller: Bytes!
+  nft: Bytes!
+  nftId: BigInt!
+  token: Bytes!
+  price: BigInt!
+  sellTime: BigInt!
+  star: BigInt!
+  rarity: BigInt!
+  snClass: BigInt!
+  position: BigInt!
+  suit: BigInt!
+  boxType: BigInt!
+}

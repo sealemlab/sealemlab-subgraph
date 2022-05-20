@@ -1,6 +1,6 @@
 ## Subgraphs
 
-
+**[Market](https://thegraph.com/explorer/subgraph/sealemlab/market)**: Tracks all NFTs in market.
 
 ## Dependencies
 
