@@ -1,26 +1,26 @@
 {
-  "name": "sacredrealm-subgraph",
+  "name": "sealemlab-subgraph",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ Sacred-Realm/[subgraph]",
-    "create-local": "graph create --node http://localhost:8020/ Sacred-Realm/[subgraph]",
-    "remove-local": "graph remove --node http://localhost:8020/ Sacred-Realm/[subgraph]",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Sacred-Realm/[subgraph]"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ sealemlab/[subgraph]",
+    "create-local": "graph create --node http://localhost:8020/ sealemlab/[subgraph]",
+    "remove-local": "graph remove --node http://localhost:8020/ sealemlab/[subgraph]",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 sealemlab/[subgraph]"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sacred-Realm/sacredrealm-subgraph.git"
+    "url": "git+https://github.com/sealemlab/sealemlab-subgraph.git"
   },
   "author": "SEALEM-LAB",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sacred-Realm/sacredrealm-subgraph/issues"
+    "url": "https://github.com/sealemlab/sealemlab-subgraph/issues"
   },
-  "homepage": "https://github.com/Sacred-Realm/sacredrealm-subgraph#readme",
+  "homepage": "https://github.com/sealemlab/sealemlab-subgraph#readme",
   "dependencies": {
     "@graphprotocol/graph-cli": "0.28.1",
     "@graphprotocol/graph-ts": "0.26.0"
