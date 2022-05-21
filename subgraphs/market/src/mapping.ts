@@ -31,7 +31,8 @@ export function handleBuy(event: Buy): void {
     if (buyInfo.nft == snAddr) {
       const attr = sn.getDatas(buyInfo.nftId, 'attr');
       buyInfo.stars = attr[0];
-      buyInfo.rarity = attr[1];
+      buyInfo.rarity = attr[1].plus(BigInt.fromI32(19)).div(BigInt.fromI32(20));
+      buyInfo.power = attr[1]
       buyInfo.role = attr[2];
       buyInfo.part = attr[3];
       buyInfo.suit = attr[4];
@@ -49,7 +50,7 @@ export function handleBuy(event: Buy): void {
       counter.nft = buyInfo.nft;
       counter.token = buyInfo.token;
     }
-    
+
     counter.transactions = counter.transactions.plus(BigInt.fromI32(1));
     counter.volume = counter.volume.plus(buyInfo.price);
     counter.items = counter.items.minus(BigInt.fromI32(1));
@@ -103,7 +104,8 @@ export function handleSell(event: Sell): void {
     if (sellInfo.nft == snAddr) {
       const attr = sn.getDatas(sellInfo.nftId, 'attr');
       sellInfo.stars = attr[0];
-      sellInfo.rarity = attr[1];
+      sellInfo.rarity = attr[1].plus(BigInt.fromI32(19)).div(BigInt.fromI32(20));
+      sellInfo.power = attr[1];
       sellInfo.role = attr[2];
       sellInfo.part = attr[3];
       sellInfo.suit = attr[4];

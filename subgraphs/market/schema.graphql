@@ -12,6 +12,7 @@ type BuyInfo @entity {
   buyTime: BigInt!
   stars: BigInt!
   rarity: BigInt!
+  power: BigInt!
   role: BigInt!
   part: BigInt!
   suit: BigInt!
@@ -28,6 +29,7 @@ type SellInfo @entity {
   sellTime: BigInt!
   stars: BigInt!
   rarity: BigInt!
+  power: BigInt!
   role: BigInt!
   part: BigInt!
   suit: BigInt!

@@ -14,7 +14,8 @@ export function handleSpawnSn(event: SpawnSn): void {
 
   snInfo.owner = event.params.to;
   snInfo.stars = event.params.attr[0];
-  snInfo.rarity = event.params.attr[1];
+  snInfo.rarity = event.params.attr[1].plus(BigInt.fromI32(19)).div(BigInt.fromI32(20));
+  snInfo.power = event.params.attr[1];
   snInfo.role = event.params.attr[2];
   snInfo.part = event.params.attr[3];
   snInfo.suit = event.params.attr[4];

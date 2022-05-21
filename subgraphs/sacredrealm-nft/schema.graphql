@@ -4,6 +4,7 @@ type SnInfo @entity {
   owner: Bytes!
   stars: BigInt!
   rarity: BigInt!
+  power: BigInt!
   role: BigInt!
   part: BigInt!
   suit: BigInt!
