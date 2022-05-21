@@ -1,5 +1,9 @@
 ## Subgraphs
 
+**[Sacred Realm NFT](https://thegraph.com/explorer/subgraph/sealemlab/sacredrealm-nft)**: Tracks all Sacred Realm NFT.
+
+**[Sacred Realm Box](https://thegraph.com/explorer/subgraph/sealemlab/sacredrealm-box)**: Tracks all Sacred Realm Box.
+
 **[Market](https://thegraph.com/explorer/subgraph/sealemlab/market)**: Tracks all NFTs in market.
 
 ## Dependencies
