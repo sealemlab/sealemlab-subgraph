@@ -1,0 +1,28 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SB
+    network: bsc
+    source:
+      address: "0xEEa8bD31DA9A2169C38968958B6DF216381B0f08"
+      abi: SB
+      startBlock: 12382401
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SbInfo
+        - SbCount
+        - SbCountByOwner
+      abis:
+        - name: SB
+          file: ./abis/SB.json
+      eventHandlers:
+        - event: BuyBoxes(indexed address,uint256,uint256[],uint256)
+          handler: handleBuyBoxes
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

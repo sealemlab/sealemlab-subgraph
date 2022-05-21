@@ -1,0 +1,31 @@
+type SnInfo @entity {
+  id: ID!
+  snId: BigInt!
+  owner: Bytes!
+  stars: BigInt!
+  rarity: BigInt!
+  role: BigInt!
+  part: BigInt!
+  suit: BigInt!
+}
+
+type SnCount @entity {
+  id: ID!
+  total: BigInt!
+  s4: BigInt!
+  s5: BigInt!
+  s6: BigInt!
+  s7: BigInt!
+  s8: BigInt!
+}
+
+type SnCountByOwner @entity {
+  id: ID!
+  owner: Bytes!
+  total: BigInt!
+  s4: BigInt!
+  s5: BigInt!
+  s6: BigInt!
+  s7: BigInt!
+  s8: BigInt!
+}

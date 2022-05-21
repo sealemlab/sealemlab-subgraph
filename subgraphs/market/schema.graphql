@@ -10,12 +10,20 @@ type BuyInfo @entity {
   sellAmount: BigInt!
   feeAmount: BigInt!
   buyTime: BigInt!
-  star: BigInt!
+  stars: BigInt!
   rarity: BigInt!
-  snClass: BigInt!
-  position: BigInt!
+  role: BigInt!
+  part: BigInt!
   suit: BigInt!
   boxType: BigInt!
+}
+
+type BuyCount @entity {
+  id: ID!
+  nft: Bytes!
+  token: Bytes!
+  transactions: BigInt!
+  volume: BigInt!
 }
 
 type SellInfo @entity {
@@ -26,10 +34,17 @@ type SellInfo @entity {
   token: Bytes!
   price: BigInt!
   sellTime: BigInt!
-  star: BigInt!
+  stars: BigInt!
   rarity: BigInt!
-  snClass: BigInt!
-  position: BigInt!
+  role: BigInt!
+  part: BigInt!
   suit: BigInt!
   boxType: BigInt!
+}
+
+type SellCount @entity {
+  id: ID!
+  nft: Bytes!
+  token: Bytes!
+  items: BigInt!
 }

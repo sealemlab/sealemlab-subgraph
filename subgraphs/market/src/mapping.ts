@@ -2,7 +2,7 @@ import { store, BigInt, Address } from '@graphprotocol/graph-ts'
 import { Market, Buy, Cancel, Sell } from '../generated/Market/Market'
 import { SN } from '../../sacredrealm-nft/generated/SN/SN'
 import { SB } from '../../sacredrealm-box/generated/SB/SB'
-import { BuyInfo, SellInfo } from '../generated/schema'
+import { BuyInfo, BuyCount, SellInfo, SellCount } from '../generated/schema'
 
 const snAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
 const sbAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
@@ -30,10 +30,10 @@ export function handleBuy(event: Buy): void {
 
     if (buyInfo.nft == snAddr) {
       const attr = sn.getDatas(buyInfo.nftId, 'attr');
-      buyInfo.star = attr[0];
+      buyInfo.stars = attr[0];
       buyInfo.rarity = attr[1];
-      buyInfo.snClass = attr[2];
-      buyInfo.position = attr[3];
+      buyInfo.role = attr[2];
+      buyInfo.part = attr[3];
       buyInfo.suit = attr[4];
     }
 
@@ -43,12 +43,53 @@ export function handleBuy(event: Buy): void {
 
     buyInfo.save();
 
-    store.remove('SellInfo', event.params.hnIds[i].toHex());
+    let buyCount = BuyCount.load(buyInfo.nft.toHex() + '-' + buyInfo.token.toHex());
+    if (!buyCount) {
+      buyCount = new BuyCount(buyInfo.nft.toHex() + '-' + buyInfo.token.toHex());
+      buyCount.nft = buyInfo.nft;
+      buyCount.token = buyInfo.token;
+    }
+
+    buyCount.transactions = buyCount.transactions.plus(BigInt.fromI32(1));
+    buyCount.volume = buyCount.volume.plus(buyInfo.price);
+
+    buyCount.save();
+
+    let sellCount = SellCount.load(buyInfo.nft.toHex() + '-' + buyInfo.token.toHex());
+    if (!sellCount) {
+      sellCount = new SellCount(buyInfo.nft.toHex() + '-' + buyInfo.token.toHex());
+      sellCount.nft = buyInfo.nft;
+      sellCount.token = buyInfo.token;
+    }
+
+    sellCount.items = sellCount.items.minus(BigInt.fromI32(1));
+
+    sellCount.save();
+
+    store.remove('SellInfo', event.params.nfts[i].toHex() + '-' + event.params.nftIds[i].toHex());
   }
 }
 
 export function handleCancel(event: Cancel): void {
   for (let i = 0; i < event.params.nftIds.length; i++) {
+    let sellInfo = SellInfo.load(event.params.nfts[i].toHex() + '-' + event.params.nftIds[i].toHex());
+    if (!sellInfo) {
+      sellInfo = new SellInfo(event.params.nfts[i].toHex() + '-' + event.params.nftIds[i].toHex());
+      sellInfo.nft = event.params.nfts[i];
+      sellInfo.nftId = event.params.nftIds[i];
+    }
+
+    let sellCount = SellCount.load(sellInfo.nft.toHex() + '-' + sellInfo.token.toHex());
+    if (!sellCount) {
+      sellCount = new SellCount(sellInfo.nft.toHex() + '-' + sellInfo.token.toHex());
+      sellCount.nft = sellInfo.nft;
+      sellCount.token = sellInfo.token;
+    }
+
+    sellCount.items = sellCount.items.minus(BigInt.fromI32(1));
+
+    sellCount.save();
+
     store.remove('SellInfo', event.params.nfts[i].toHex() + '-' + event.params.nftIds[i].toHex());
   }
 }
@@ -71,10 +112,10 @@ export function handleSell(event: Sell): void {
 
     if (sellInfo.nft == snAddr) {
       const attr = sn.getDatas(sellInfo.nftId, 'attr');
-      sellInfo.star = attr[0];
+      sellInfo.stars = attr[0];
       sellInfo.rarity = attr[1];
-      sellInfo.snClass = attr[2];
-      sellInfo.position = attr[3];
+      sellInfo.role = attr[2];
+      sellInfo.part = attr[3];
       sellInfo.suit = attr[4];
     }
 
@@ -83,5 +124,16 @@ export function handleSell(event: Sell): void {
     }
 
     sellInfo.save();
+
+    let sellCount = SellCount.load(sellInfo.nft.toHex() + '-' + sellInfo.token.toHex());
+    if (!sellCount) {
+      sellCount = new SellCount(sellInfo.nft.toHex() + '-' + sellInfo.token.toHex());
+      sellCount.nft = sellInfo.nft;
+      sellCount.token = sellInfo.token;
+    }
+
+    sellCount.items = sellCount.items.plus(BigInt.fromI32(1));
+
+    sellCount.save();
   }
 }

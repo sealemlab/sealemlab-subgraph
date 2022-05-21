@@ -1,0 +1,27 @@
+type SbInfo @entity {
+  id: ID!
+  sbId: BigInt!
+  owner: Bytes!
+  boxType: BigInt!
+}
+
+type SbCount @entity {
+  id: ID!
+  total: BigInt!
+  t0: BigInt!
+  t1: BigInt!
+  t2: BigInt!
+  t3: BigInt!
+  t4: BigInt!
+}
+
+type SbCountByOwner @entity {
+  id: ID!
+  owner: Bytes!
+  total: BigInt!
+  t0: BigInt!
+  t1: BigInt!
+  t2: BigInt!
+  t3: BigInt!
+  t4: BigInt!
+}

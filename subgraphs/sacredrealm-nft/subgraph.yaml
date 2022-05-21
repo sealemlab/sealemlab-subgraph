@@ -1,0 +1,28 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SN
+    network: bsc
+    source:
+      address: "0xEEa8bD31DA9A2169C38968958B6DF216381B0f08"
+      abi: SN
+      startBlock: 12382401
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SnInfo
+        - SnCount
+        - SnCountByOwner
+      abis:
+        - name: SN
+          file: ./abis/SN.json
+      eventHandlers:
+        - event: SpawnSn(indexed address,uint256,uint256[])
+          handler: handleSpawnHn
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
