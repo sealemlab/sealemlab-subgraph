@@ -18,14 +18,6 @@ type BuyInfo @entity {
   boxType: BigInt!
 }
 
-type BuyCount @entity {
-  id: ID!
-  nft: Bytes!
-  token: Bytes!
-  transactions: BigInt!
-  volume: BigInt!
-}
-
 type SellInfo @entity {
   id: ID!
   seller: Bytes!
@@ -42,9 +34,11 @@ type SellInfo @entity {
   boxType: BigInt!
 }
 
-type SellCount @entity {
+type Counter @entity {
   id: ID!
   nft: Bytes!
   token: Bytes!
+  transactions: BigInt!
+  volume: BigInt!
   items: BigInt!
 }
