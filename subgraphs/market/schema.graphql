@@ -7,8 +7,8 @@ type BuyInfo @entity {
   token: Bytes!
   price: BigInt!
   fee: BigInt!
-  sellAmount: BigInt!
   feeAmount: BigInt!
+  sellAmount: BigInt!
   buyTime: BigInt!
   stars: BigInt!
   rarity: BigInt!
