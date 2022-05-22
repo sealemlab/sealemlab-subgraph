@@ -22,7 +22,7 @@ dataSources:
           file: ./abis/SN.json
       eventHandlers:
         - event: SpawnSn(indexed address,uint256,uint256[])
-          handler: handleSpawnHn
+          handler: handleSpawnSn
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/mapping.ts
