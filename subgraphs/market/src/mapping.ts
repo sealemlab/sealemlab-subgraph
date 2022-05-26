@@ -28,6 +28,10 @@ export function handleBuy(event: Buy): void {
     buyInfo.sellAmount = buyInfo.price.minus(buyInfo.feeAmount);
     buyInfo.buyTime = event.block.timestamp;
 
+    if (buyInfo.nft == sbAddr) {
+      buyInfo.boxType = sb.sbIdToType(buyInfo.nftId);
+    }
+
     if (buyInfo.nft == snAddr) {
       const attr = sn.getDatas(buyInfo.nftId, 'attr');
       buyInfo.stars = attr[0];
@@ -36,10 +40,6 @@ export function handleBuy(event: Buy): void {
       buyInfo.role = attr[2];
       buyInfo.part = attr[3];
       buyInfo.suit = attr[4];
-    }
-
-    if (buyInfo.nft == sbAddr) {
-      buyInfo.boxType = sb.sbIdToType(buyInfo.nftId);
     }
 
     buyInfo.save();
@@ -95,11 +95,15 @@ export function handleSell(event: Sell): void {
     }
     const sb = SB.bind(sbAddr);
     const sn = SN.bind(snAddr);
-    
+
     sellInfo.seller = event.params.seller;
     sellInfo.token = event.params.tokens[i];
     sellInfo.price = event.params.prices[i];
     sellInfo.sellTime = event.block.timestamp;
+
+    if (sellInfo.nft == sbAddr) {
+      sellInfo.boxType = sb.sbIdToType(sellInfo.nftId);
+    }
 
     if (sellInfo.nft == snAddr) {
       const attr = sn.getDatas(sellInfo.nftId, 'attr');
@@ -109,10 +113,6 @@ export function handleSell(event: Sell): void {
       sellInfo.role = attr[2];
       sellInfo.part = attr[3];
       sellInfo.suit = attr[4];
-    }
-
-    if (sellInfo.nft == sbAddr) {
-      sellInfo.boxType = sb.sbIdToType(sellInfo.nftId);
     }
 
     sellInfo.save();
