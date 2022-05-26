@@ -16,13 +16,14 @@ dataSources:
       entities:
         - BuyInfo
         - SellInfo
+        - Counter
       abis:
         - name: Market
           file: ./abis/Market.json
-        - name: SN
-          file: ../sacredrealm-nft/abis/SN.json
         - name: SB
           file: ../sacredrealm-box/abis/SB.json
+        - name: SN
+          file: ../sacredrealm-nft/abis/SN.json
       eventHandlers:
         - event: Buy(indexed address,address[],address[],uint256[],address[],uint256[])
           handler: handleBuy
