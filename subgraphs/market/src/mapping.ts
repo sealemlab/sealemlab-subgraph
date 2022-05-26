@@ -1,11 +1,11 @@
 import { store, BigInt, Address } from '@graphprotocol/graph-ts'
 import { Market, Buy, Cancel, Sell } from '../generated/Market/Market'
-import { SN } from '../../sacredrealm-nft/generated/SN/SN'
 import { SB } from '../../sacredrealm-box/generated/SB/SB'
+import { SN } from '../../sacredrealm-nft/generated/SN/SN'
 import { BuyInfo, SellInfo, Counter } from '../generated/schema'
 
-const snAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
 const sbAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
+const snAddr = Address.fromString('0xEEa8bD31DA9A2169C38968958B6DF216381B0f08');
 
 export function handleBuy(event: Buy): void {
   for (let i = 0; i < event.params.nftIds.length; i++) {
@@ -16,8 +16,8 @@ export function handleBuy(event: Buy): void {
       buyInfo.nftId = event.params.nftIds[i];
     }
     const market = Market.bind(event.address);
-    const sn = SN.bind(snAddr);
     const sb = SB.bind(sbAddr);
+    const sn = SN.bind(snAddr);
 
     buyInfo.buyer = event.params.buyer;
     buyInfo.seller = event.params.sellers[i];
@@ -93,9 +93,9 @@ export function handleSell(event: Sell): void {
       sellInfo.nft = event.params.nfts[i];
       sellInfo.nftId = event.params.nftIds[i];
     }
-    const sn = SN.bind(snAddr);
     const sb = SB.bind(sbAddr);
-
+    const sn = SN.bind(snAddr);
+    
     sellInfo.seller = event.params.seller;
     sellInfo.token = event.params.tokens[i];
     sellInfo.price = event.params.prices[i];
