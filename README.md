@@ -6,6 +6,8 @@
 
 **[Market](https://thegraph.com/explorer/subgraph/sealemlab/market)**: Tracks all NFTs in market.
 
+**[Inviting](https://thegraph.com/explorer/subgraph/sealemlab/inviting)**: Tracks all inviting events.
+
 ## Dependencies
 
 - [Graph CLI](https://github.com/graphprotocol/graph-cli)
