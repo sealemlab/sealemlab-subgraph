@@ -36,8 +36,6 @@ export function handleBuyBoxes(event: BuyBoxes): void {
       sbCount.t4 = sbCount.t4.plus(BigInt.fromI32(1));
     }
 
-    sbCount.save();
-
     let sbCountByOwner = SbCountByOwner.load(event.params.user.toHex());
     if (!sbCountByOwner) {
       sbCountByOwner = new SbCountByOwner(event.params.user.toHex());
@@ -45,6 +43,7 @@ export function handleBuyBoxes(event: BuyBoxes): void {
     }
 
     sbCountByOwner.total = sbCountByOwner.total.plus(BigInt.fromI32(1));
+    if (sbCountByOwner.total.equals(BigInt.fromI32(1))) sbCount.owners.plus(BigInt.fromI32(1));
     if (sbInfo.boxType.equals(BigInt.fromI32(0))) {
       sbCountByOwner.t0 = sbCountByOwner.t0.plus(BigInt.fromI32(1));
     } else if (sbInfo.boxType.equals(BigInt.fromI32(1))) {
@@ -58,6 +57,8 @@ export function handleBuyBoxes(event: BuyBoxes): void {
     }
 
     sbCountByOwner.save();
+
+    sbCount.save();
   }
 }
 
@@ -73,6 +74,11 @@ export function handleTransfer(event: Transfer): void {
 
     sbInfo.save();
 
+    let sbCount = SbCount.load(BigInt.fromI32(0).toHex());
+    if (!sbCount) {
+      sbCount = new SbCount(BigInt.fromI32(0).toHex());
+    }
+
     let sbCountByOwnerFrom = SbCountByOwner.load(event.params.from.toHex());
     if (!sbCountByOwnerFrom) {
       sbCountByOwnerFrom = new SbCountByOwner(event.params.from.toHex());
@@ -80,6 +86,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     sbCountByOwnerFrom.total = sbCountByOwnerFrom.total.minus(BigInt.fromI32(1));
+    if (sbCountByOwnerFrom.total.equals(BigInt.fromI32(0))) sbCount.owners.minus(BigInt.fromI32(1));
     if (sbInfo.boxType.equals(BigInt.fromI32(0))) {
       sbCountByOwnerFrom.t0 = sbCountByOwnerFrom.t0.minus(BigInt.fromI32(1));
     } else if (sbInfo.boxType.equals(BigInt.fromI32(1))) {
@@ -101,6 +108,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     sbCountByOwnerTo.total = sbCountByOwnerTo.total.plus(BigInt.fromI32(1));
+    if (sbCountByOwnerTo.total.equals(BigInt.fromI32(1))) sbCount.owners.plus(BigInt.fromI32(1));
     if (sbInfo.boxType.equals(BigInt.fromI32(0))) {
       sbCountByOwnerTo.t0 = sbCountByOwnerTo.t0.plus(BigInt.fromI32(1));
     } else if (sbInfo.boxType.equals(BigInt.fromI32(1))) {
@@ -114,5 +122,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     sbCountByOwnerTo.save();
+
+    sbCount.save();
   }
 }

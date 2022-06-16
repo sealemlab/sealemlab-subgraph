@@ -40,8 +40,6 @@ export function handleSpawnSn(event: SpawnSn): void {
     snCount.s8 = snCount.s8.plus(BigInt.fromI32(1));
   }
 
-  snCount.save();
-
   let snCountByOwner = SnCountByOwner.load(event.params.to.toHex());
   if (!snCountByOwner) {
     snCountByOwner = new SnCountByOwner(event.params.to.toHex());
@@ -49,6 +47,7 @@ export function handleSpawnSn(event: SpawnSn): void {
   }
 
   snCountByOwner.total = snCountByOwner.total.plus(BigInt.fromI32(1));
+  if (snCountByOwner.total.equals(BigInt.fromI32(1))) snCount.owners.plus(BigInt.fromI32(1));
   if (snInfo.stars.equals(BigInt.fromI32(4))) {
     snCountByOwner.s4 = snCountByOwner.s4.plus(BigInt.fromI32(1));
   } else if (snInfo.stars.equals(BigInt.fromI32(5))) {
@@ -62,6 +61,8 @@ export function handleSpawnSn(event: SpawnSn): void {
   }
 
   snCountByOwner.save();
+
+  snCount.save();
 }
 
 export function handleTransfer(event: Transfer): void {
@@ -76,6 +77,11 @@ export function handleTransfer(event: Transfer): void {
 
     snInfo.save();
 
+    let snCount = SnCount.load(BigInt.fromI32(0).toHex());
+    if (!snCount) {
+      snCount = new SnCount(BigInt.fromI32(0).toHex());
+    }
+
     let snCountByOwnerFrom = SnCountByOwner.load(event.params.from.toHex());
     if (!snCountByOwnerFrom) {
       snCountByOwnerFrom = new SnCountByOwner(event.params.from.toHex());
@@ -83,6 +89,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     snCountByOwnerFrom.total = snCountByOwnerFrom.total.minus(BigInt.fromI32(1));
+    if (snCountByOwnerFrom.total.equals(BigInt.fromI32(0))) snCount.owners.minus(BigInt.fromI32(1));
     if (snInfo.stars.equals(BigInt.fromI32(4))) {
       snCountByOwnerFrom.s4 = snCountByOwnerFrom.s4.minus(BigInt.fromI32(1));
     } else if (snInfo.stars.equals(BigInt.fromI32(5))) {
@@ -104,6 +111,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     snCountByOwnerTo.total = snCountByOwnerTo.total.plus(BigInt.fromI32(1));
+    if (snCountByOwnerTo.total.equals(BigInt.fromI32(1))) snCount.owners.plus(BigInt.fromI32(1));
     if (snInfo.stars.equals(BigInt.fromI32(4))) {
       snCountByOwnerTo.s4 = snCountByOwnerTo.s4.plus(BigInt.fromI32(1));
     } else if (snInfo.stars.equals(BigInt.fromI32(5))) {
@@ -117,5 +125,7 @@ export function handleTransfer(event: Transfer): void {
     }
 
     snCountByOwnerTo.save();
+
+    snCount.save();
   }
 }

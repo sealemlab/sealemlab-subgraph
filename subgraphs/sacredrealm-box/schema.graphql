@@ -8,6 +8,7 @@ type SbInfo @entity {
 type SbCount @entity {
   id: ID!
   total: BigInt!
+  owners: BigInt!
   t0: BigInt!
   t1: BigInt!
   t2: BigInt!

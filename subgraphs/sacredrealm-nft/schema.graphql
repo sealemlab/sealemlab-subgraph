@@ -13,6 +13,7 @@ type SnInfo @entity {
 type SnCount @entity {
   id: ID!
   total: BigInt!
+  owners: BigInt!
   s4: BigInt!
   s5: BigInt!
   s6: BigInt!
