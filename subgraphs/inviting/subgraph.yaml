@@ -6,9 +6,9 @@ dataSources:
     name: Inviting
     network: bsc
     source:
-      address: "0x669b1B48f2a71d8F40196A09E9cEC6e916A7BC0c"
+      address: "0x058A11b288b4bDD5De2FEa5f338B27671bFd2582"
       abi: Inviting
-      startBlock: 18731625
+      startBlock: 18876037
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
