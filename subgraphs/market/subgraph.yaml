@@ -6,9 +6,9 @@ dataSources:
     name: Market
     network: bsc
     source:
-      address: "0xF342F3b74f5F5F23664EB4FF08a1691d4a0A2F29"
+      address: "0x508980d9B39656D07D23f9d5e93DDd5dc77dCB52"
       abi: Market
-      startBlock: 18732887
+      startBlock: 18964726
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

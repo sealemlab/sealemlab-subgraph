@@ -6,9 +6,9 @@ dataSources:
     name: SN
     network: bsc
     source:
-      address: "0xbd9e51D9C96d916B487bc7a855E6EA8c5E354bBE"
+      address: "0xcE4c314f5baeDea571c60CF1D09eCf4304FeCF6A"
       abi: SN
-      startBlock: 18732904
+      startBlock: 18876126
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

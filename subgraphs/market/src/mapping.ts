@@ -4,8 +4,8 @@ import { SB } from '../../sacredrealm-box/generated/SB/SB'
 import { SN } from '../../sacredrealm-nft/generated/SN/SN'
 import { BuyInfo, SellInfo, Counter } from '../generated/schema'
 
-const sbAddr = Address.fromString('0x89c2BB57f63E8D7E1dA5dC1B9858E9C0b7cfF4D5');
-const snAddr = Address.fromString('0xbd9e51D9C96d916B487bc7a855E6EA8c5E354bBE');
+const sbAddr = Address.fromString('0xA8De106949D494E2b346E4496695Abe71C4b02eC');
+const snAddr = Address.fromString('0xcE4c314f5baeDea571c60CF1D09eCf4304FeCF6A');
 
 export function handleBuy(event: Buy): void {
   for (let i = 0; i < event.params.nftIds.length; i++) {
