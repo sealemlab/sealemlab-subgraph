@@ -27,4 +27,4 @@ npm install -g @graphprotocol/graph-cli
 
 4. Run the `graph build` command to build the subgraph, and check compilation errors before deploying.
 
-5. Run `graph deploy --node https://api.thegraph.com/deploy/ sealemlab/[subgraph]` to deploy the subgraph.
+5. Run `graph deploy --product hosted-service sealemlab/[subgraph]` to deploy the subgraph.
